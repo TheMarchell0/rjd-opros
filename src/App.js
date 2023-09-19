@@ -1,11 +1,9 @@
-import './App.css';
+import './App.scss';
 import Review from "./pages/Review";
 
 function App() {
   return (
-      <div className="App">
-        <Review />
-      </div>
+      <Review />
   );
 }
 

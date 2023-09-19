@@ -2,8 +2,70 @@
   color: red;
   opacity: 0;
   transition: opacity 0.3s;
+  margin-top: 5px;
+  margin-bottom: 17px;
 }
 
-.validationError.visible {
+.textInput {
+  margin-bottom: 22px
+}
+
+.visible {
   opacity: 1;
+}
+
+.title {
+  color: #606060;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.list {
+  display: flex;
+}
+
+.label {
+  color: #000;
+  text-align: center;
+  font-size: 18.667px;
+  font-weight: 500;
+  border-radius: 6.8px;
+  background: #FFF;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  transition: 0.1s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.labelFirst {
+  margin-right: 36px;
+}
+
+input[type="radio"] {
+  position: absolute !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  white-space: nowrap !important;
+  -webkit-clip-path: inset(100%) !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+  appearance: none !important;
+  display: none !important;
+
+  &:checked + .label {
+    background: #E3051B;
+    color: #FFFFFF;
+  }
 }

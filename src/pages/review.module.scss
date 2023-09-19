@@ -1,0 +1,82 @@
+.head {
+  display: flex;
+  padding-top: 124px;
+  margin-bottom: 101px;
+}
+
+.headImg {
+  margin: 6px 60px 0 0;
+}
+
+.headTitle {
+  color: #E3051B;
+  font-family: 'RussianRail G Pro';
+  font-size: 64px;
+  font-weight: 700;
+  margin-bottom: 37px;
+}
+
+.headDescription {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  max-width: 928px;
+  width: 100%;
+
+  & span {
+    color: #E3051B;
+    font-weight: 700;
+  }
+}
+
+.formItem {
+  border-radius: 20px;
+  background: #F5F5F5;
+  padding: 37px 40px 42px;
+  margin-bottom: 60px;
+}
+
+.formTitle {
+  color: #000;
+  font-family: 'RussianRail G Pro';
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 44px;
+}
+
+.formCommentText {
+  color: #000;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 14px 0 19px;
+}
+
+.list {
+  display: flex;
+}
+
+.button {
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;
+  background: #E3051B;
+  padding: 32px 52px;
+  color: #FFF;
+  font-family: 'RussianRail G Pro';
+  font-size: 32px;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  transition: 0.1s linear;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.footerTitle {
+  color: #E3051B;
+  font-size: 40px;
+  margin-bottom: 25px;
+}

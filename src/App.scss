@@ -1,0 +1,44 @@
+@import url(fonts/fonts.css);
+@import url(./vendor/normalize.css);
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+#root {
+    background-color: #FFFFFF;
+}
+
+.container {
+    max-width: 1230px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.error {
+    color: red;
+}
+
+input[type="text"] {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 20px;
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 10px;
+
+    &::-webkit-input-placeholder,
+    &::-moz-placeholder,
+    &:-moz-placeholder,
+    &:-ms-input-placeholder {
+        color: #000;
+     }
+}
+
+form {
+    padding-bottom: 91px;
+}
