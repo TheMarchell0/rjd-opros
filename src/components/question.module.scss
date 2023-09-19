@@ -1,0 +1,9 @@
+.validationError {
+  color: red;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.validationError.visible {
+  opacity: 1;
+}
