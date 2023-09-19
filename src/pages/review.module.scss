@@ -80,3 +80,17 @@
   font-size: 40px;
   margin-bottom: 25px;
 }
+
+.successMessage {
+  transition: opacity 0.3s;
+  color: green;
+  font-size: 40px;
+  font-weight: bold;
+  opacity: 0;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.successMessageVisible {
+  opacity: 1;
+}

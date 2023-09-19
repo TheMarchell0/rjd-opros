@@ -1,15 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {questionsList} from "../vendor/questionsList";
 import css from './review.module.scss';
 import Question from "../components/Question";
+import {allFields} from "../vendor/allFields";
 
 function Review() {
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm();
+    const [isSend, setIsSend] = useState(false);
 
     const onSubmit = (data) => {
-        console.log(data);
+        const result = {};
+
+        const fields = allFields;
+
+        fields.forEach((field) => {
+            if (data[field] !== undefined) {
+                result[field] = data[field];
+            }
+        });
+        alert(JSON.stringify(result));
+        setIsSend(true);
         reset();
     };
 
@@ -44,7 +56,8 @@ function Review() {
                             ))
                         }
                         <p className={css.formCommentText}>Оставьте ваш комментарий</p>
-                        <input type="text" name="Как вам новый офис? - Комментарий" {...register("Как вам новый офис? - Комментарий")}
+                        <input type="text"
+                               name="Как вам новый офис? - Комментарий" {...register("Как вам новый офис? - Комментарий")}
                                placeholder='Введите текст...'/>
                     </div>
                     <div className={css.formItem}>
@@ -139,10 +152,12 @@ function Review() {
                     <div className={css.formItem}>
                         <h2 className={`${css.formTitle} ${css.footerTitle}`}>Оставьте ваши пожелания</h2>
                         <input type="text"
-                               name="Инженерное оборудование и техническое обслуживание - Комментарий" {...register("Инженерное оборудование и техническое обслуживание - Комментарий")}
+                               name="Пожелания" {...register("Пожелания")}
                                placeholder='Введите текст...'/>
                     </div>
                     <button className={css.button} type="submit">Отправить</button>
+                    <p className={`${css.successMessage} ${isSend && css.successMessageVisible}`}>Спасибо за пройденный
+                        опрос!</p>
                 </form>
             </div>
         </main>

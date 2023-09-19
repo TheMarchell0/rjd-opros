@@ -1,24 +1,33 @@
-import React, {useState, useEffect} from 'react';
-import {v4 as uuidv4} from 'uuid';
-import css from './question.module.scss';
+import React, {useState, useEffect} from "react";
+import {v4 as uuidv4} from "uuid";
+import css from "./question.module.scss";
 
 function Question({title, name, register, error}) {
-
     const [textTrigger, setTextTrigger] = useState(false);
     const [parsedTitle, setParsedTitle] = useState(title);
+    const [parsedName, setParsedName] = useState(name);
+    const regex = /^[0-9]+\.\s+/;
 
     useEffect(() => {
-        if (title.includes('{type=text}:')) {
-            setParsedTitle(title.replace('{type=text}:', ''));
+        let parsedTitle = title;
+        let parsedName = name;
+        const match = parsedName.match(regex);
+        if (match) {
+            parsedName = parsedName.slice(match[0].length);
+        }
+        if (parsedTitle.includes("{type=text}:") && parsedName.includes("{type=text}:")) {
+            parsedTitle = parsedTitle.replace("{type=text}:", "").trim();
+            parsedName = parsedName.replace("{type=text}:", "").trim();
             setTextTrigger(true);
         }
-    }, [title]);
+        setParsedName(parsedName);
+        setParsedTitle(parsedTitle);
+    }, [title, name]);
 
     const textInput = (
         <input
             type="text"
-            id={uuidv4()}
-            {...register(name, {required: true})}
+            {...register(parsedName, {required: false})}
             className={css.textInput}
             placeholder="Введите текст..."
         />
@@ -31,10 +40,16 @@ function Question({title, name, register, error}) {
                 <input
                     type="radio"
                     id={id}
+                    name={name}
                     {...register(name, {required: true})}
                     value={`${i}`}
                 />
-                <label htmlFor={id} className={`${css.label} ${i === 0 && `${css.labelFirst}`}`}>{i}</label>
+                <label
+                    htmlFor={id}
+                    className={`${css.label} ${i === 0 && `${css.labelFirst}`}`}
+                >
+                    {i}
+                </label>
             </React.Fragment>
         );
     });
@@ -42,10 +57,12 @@ function Question({title, name, register, error}) {
     return (
         <div>
             <p className={css.title}>{parsedTitle}</p>
-            <div className={css.list}>
-                {textTrigger ? textInput : radioInput}
-            </div>
-            {!textTrigger && <p className={`${css.validationError} ${error && css.visible}`}>Это обязательное поле</p>}
+            <div className={css.list}>{textTrigger ? textInput : radioInput}</div>
+            {!textTrigger && (
+                <p className={`${css.validationError} ${error && css.visible}`}>
+                    Это обязательное поле
+                </p>
+            )}
         </div>
     );
 }
