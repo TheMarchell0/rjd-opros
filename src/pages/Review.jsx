@@ -12,7 +12,7 @@ function Review() {
     const {register, handleSubmit, formState: {errors}, reset} = formMethods;
     const [isSend, setIsSend] = useState(false);
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const result = {};
         const fields = allFields;
         fields.forEach((field) => {
@@ -20,12 +20,28 @@ function Review() {
                 result[field] = data[field];
             }
         });
-        alert(JSON.stringify(result));
-        setIsSend(true);
-        setTimeout(() => {
-            setIsSend(false);
-        }, 5000);
-        reset();
+
+        try {
+            const response = await fetch("https://script.google.com/macros/s/AKfycbxk8UB4QT0vL5hdTBBogTpMXAl3pppPZ9p9bQV5uUZ9AI9WmDsPY40Ze53t2WS58nbFiA/exec", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(result),
+            });
+
+            if (response.ok) {
+                setIsSend(true);
+                setTimeout(() => {
+                    setIsSend(false);
+                }, 5000);
+                reset();
+            } else {
+                // Обработка ошибки
+            }
+        } catch (error) {
+            // Обработка ошибки
+        }
     };
 
     return (
