@@ -31,7 +31,7 @@ function Review() {
                     "Content-Type": "application/json",
                     "Origin": "https://rjd-opros.vercel.app",
                 },
-                body: JSON.stringify({...result, method: 'post'}),
+                body: JSON.stringify(result),
             });
 
             if (response.ok) {
