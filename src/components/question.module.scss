@@ -63,9 +63,9 @@ input[type="radio"] {
   overflow: hidden !important;
   appearance: none !important;
   display: none !important;
+}
 
-  &:checked + .label {
-    background: #E3051B;
-    color: #FFFFFF;
-  }
+.checked {
+  background: #E3051B;
+  color: #FFFFFF;
 }

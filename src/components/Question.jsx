@@ -1,54 +1,57 @@
 import React, {useState, useEffect} from "react";
-import {v4 as uuidv4} from "uuid";
+import {useFormContext} from "react-hook-form";
 import css from "./question.module.scss";
 
-function Question({title, name, register, error}) {
+function Question({title, name, error, isSend}) {
     const [textTrigger, setTextTrigger] = useState(false);
-    const [parsedTitle, setParsedTitle] = useState(title);
-    const [parsedName, setParsedName] = useState(name);
-    const regex = /^[0-9]+\.\s+/;
+    const [selected, setSelected] = useState(null);
+    const {register, setValue, watch} = useFormContext();
+
+    const handleInputChange = (index) => {
+        setSelected(index);
+    };
 
     useEffect(() => {
-        let parsedTitle = title;
-        let parsedName = name;
-        const match = parsedName.match(regex);
-        if (match) {
-            parsedName = parsedName.slice(match[0].length);
+        if (isSend) {
+            setSelected(null);
         }
-        if (parsedTitle.includes("{type=text}:") && parsedName.includes("{type=text}:")) {
-            parsedTitle = parsedTitle.replace("{type=text}:", "").trim();
-            parsedName = parsedName.replace("{type=text}:", "").trim();
+    }, [isSend]);
+
+    useEffect(() => {
+        if (title.includes("Чтобы вы хотели изменить") || title.includes("Чего вам не хватает")) {
             setTextTrigger(true);
         }
-        setParsedName(parsedName);
-        setParsedTitle(parsedTitle);
-    }, [title, name]);
+    }, [title]);
 
     const textInput = (
         <input
             type="text"
-            {...register(parsedName, {required: false})}
+            name={name}
+            defaultValue={watch(name)}
+            {...register(name, { required: false })}
             className={css.textInput}
             placeholder="Введите текст..."
+            onChange={(e) => setValue(name, e.target.value)}
         />
     );
 
     const radioInput = Array.from({length: 6}, (_, i) => {
-        const id = uuidv4();
         return (
             <React.Fragment key={i}>
-                <input
-                    type="radio"
-                    id={id}
-                    name={name}
-                    {...register(name, {required: true})}
-                    value={`${i}`}
-                />
                 <label
-                    htmlFor={id}
-                    className={`${css.label} ${i === 0 && `${css.labelFirst}`}`}
+                    className={`${css.label} ${i === 0 ? `${css.labelFirst}` : ''} ${selected === i ? `${css.checked}` : ''}`}
                 >
                     {i}
+                    <input
+                        type="radio"
+                        name={name}
+                        {...register(name, { required: true })}
+                        value={i}
+                        onChange={(e) => {
+                            handleInputChange(i);
+                            setValue(name, e.target.value);
+                        }}
+                    />
                 </label>
             </React.Fragment>
         );
@@ -56,7 +59,7 @@ function Question({title, name, register, error}) {
 
     return (
         <div>
-            <p className={css.title}>{parsedTitle}</p>
+            <p className={css.title}>{title}</p>
             <div className={css.list}>{textTrigger ? textInput : radioInput}</div>
             {!textTrigger && (
                 <p className={`${css.validationError} ${error && css.visible}`}>
