@@ -12,7 +12,7 @@ function Review() {
     const {register, handleSubmit, formState: {errors}, reset} = formMethods;
     const [isSend, setIsSend] = useState(false);
 
-    console.log(124144)
+    console.log('убрал слеш')
 
     const onSubmit = async (data) => {
         const result = {};
@@ -29,7 +29,7 @@ function Review() {
                 mode: 'cors',
                 headers: {
                     "Content-Type": "application/json",
-                    "Origin": "https://rjd-opros.vercel.app/",
+                    "Origin": "https://rjd-opros.vercel.app",
                 },
                 body: JSON.stringify({...result, method: 'post'}),
             });
