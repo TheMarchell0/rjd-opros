@@ -22,10 +22,11 @@ function Review() {
         });
 
         try {
-            const response = await fetch("https://script.google.com/macros/s/AKfycbwAhu4tLxYJsB8uR-ZodLUJ2LUPhNcvDAoomMfyteXJcZTUmTplWlkmuVScDkRinys/exec", {
+            const response = await fetch("https://script.google.com/macros/s/AKfycbyr7K5qqBOPZ8GMb7Jkj4IA1XirdgyMYX3R6rJ4tal5BAfhT-IKf_UHm-M0yvZDSD8uOg/exec", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Origin": "https://rjd-opros.vercel.app/",
                 },
                 body: JSON.stringify(result),
             });
