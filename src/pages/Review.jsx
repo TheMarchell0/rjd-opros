@@ -12,7 +12,7 @@ function Review() {
     const {register, handleSubmit, formState: {errors}, reset} = formMethods;
     const [isSend, setIsSend] = useState(false);
 
-    console.log('новое х5')
+    console.log('новое х6')
 
     const onSubmit = async (data) => {
         const result = {};
@@ -24,7 +24,7 @@ function Review() {
         });
 
         try {
-            const response = await fetch("https://script.google.com/macros/s/AKfycbyhwrNFdVBnOqgZodQolLAgYvRQDpv8BgeOFRoEOK9-SeMVf37JbHdttISjtiYpvwrvvA/exec", {
+            const response = await fetch("https://docs.google.com/spreadsheets/d/127Gxe82GUUTUsJ2VQMJPKe1jgr6Qb2JJZNy6p7nq7aE/edit#gid=0", {
                 method: "POST",
                 mode: 'cors',
                 headers: {
