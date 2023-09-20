@@ -12,6 +12,8 @@ function Review() {
     const {register, handleSubmit, formState: {errors}, reset} = formMethods;
     const [isSend, setIsSend] = useState(false);
 
+    console.log(124144)
+
     const onSubmit = async (data) => {
         const result = {};
         const fields = allFields;
@@ -22,7 +24,7 @@ function Review() {
         });
 
         try {
-            const response = await fetch("https://script.google.com/macros/s/AKfycbyr7K5qqBOPZ8GMb7Jkj4IA1XirdgyMYX3R6rJ4tal5BAfhT-IKf_UHm-M0yvZDSD8uOg/exec", {
+            const response = await fetch("https://script.google.com/macros/s/AKfycbyDwZoZ2zVEJOzyNV889jlCmL1XLWh8A15NHjNX-FPiRX1ucRnaM0Dhd-rpCy_qLH5kMA/exec", {
                 method: "POST",
                 mode: 'cors',
                 headers: {
