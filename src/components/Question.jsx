@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from "react";
-import {useFormContext} from "react-hook-form";
+import React, { useState, useEffect, useRef } from "react";
+import { useFormContext } from "react-hook-form";
 import css from "./question.module.scss";
 
-function Question({title, name, error, isSend}) {
+function Question({ title, name, error, isSend }) {
     const [textTrigger, setTextTrigger] = useState(false);
     const [selected, setSelected] = useState(null);
-    const {register, setValue, watch} = useFormContext();
+    const { register, setValue, watch } = useFormContext();
+    const validationErrorRef = useRef();
 
     const handleInputChange = (index) => {
         setSelected(index);
@@ -23,6 +24,15 @@ function Question({title, name, error, isSend}) {
         }
     }, [title]);
 
+    useEffect(() => {
+        if (selected !== null && error) {
+            error.message = "";
+            if (validationErrorRef.current) {
+                validationErrorRef.current.classList.remove(css.visible);
+            }
+        }
+    }, [selected, error]);
+
     const textInput = (
         <input
             type="text"
@@ -35,11 +45,13 @@ function Question({title, name, error, isSend}) {
         />
     );
 
-    const radioInput = Array.from({length: 6}, (_, i) => {
+    const radioInput = Array.from({ length: 6 }, (_, i) => {
         return (
             <React.Fragment key={i}>
                 <label
-                    className={`${css.label} ${i === 0 ? `${css.labelFirst}` : ''} ${selected === i ? `${css.checked}` : ''}`}
+                    className={`${css.label} ${i === 0 ? `${css.labelFirst}` : ""} ${
+                        selected === i ? `${css.checked}` : ""
+                    }`}
                 >
                     {i}
                     <input
@@ -62,7 +74,7 @@ function Question({title, name, error, isSend}) {
             <p className={css.title}>{title}</p>
             <div className={css.list}>{textTrigger ? textInput : radioInput}</div>
             {!textTrigger && (
-                <p className={`${css.validationError} ${error && css.visible}`}>
+                <p ref={validationErrorRef} className={`${css.validationError} ${error ? css.visible : ""}`}>
                     Это обязательное поле
                 </p>
             )}
