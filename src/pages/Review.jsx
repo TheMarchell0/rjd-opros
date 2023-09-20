@@ -22,7 +22,7 @@ function Review() {
         });
 
         try {
-            const response = await fetch("https://script.google.com/macros/s/AKfycbxk8UB4QT0vL5hdTBBogTpMXAl3pppPZ9p9bQV5uUZ9AI9WmDsPY40Ze53t2WS58nbFiA/exec", {
+            const response = await fetch("https://script.google.com/macros/s/AKfycbwAhu4tLxYJsB8uR-ZodLUJ2LUPhNcvDAoomMfyteXJcZTUmTplWlkmuVScDkRinys/exec", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
