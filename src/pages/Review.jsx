@@ -14,7 +14,7 @@ function Review() {
 
     const onSubmit = async (data) => {
         try {
-            await axios.post("http:localhost:4000/proxy", data);
+            await axios.post("https://the-marchell0-proxy.vercel.app/proxy", data);
             setIsSend(true);
             setTimeout(() => {
                 setIsSend(false);
