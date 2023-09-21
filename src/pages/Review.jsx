@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from "react";
 import {useForm, FormProvider} from "react-hook-form";
+import axios from 'axios';
 import {questionsList} from "../vendor/questionsList";
 import {allFields} from "../vendor/allFields";
 import css from './review.module.scss';
 import Question from "../components/Question";
-import { generateAuthUrl } from "../auth";
-
 
 function Review() {
 
@@ -13,87 +12,31 @@ function Review() {
     const {register, handleSubmit, formState: {errors}, reset} = formMethods;
     const [isSend, setIsSend] = useState(false);
 
-    useEffect(() => {
-        const authUrl = generateAuthUrl();
-        console.log("Авторизуйтесь на следующей странице:", authUrl);
-    }, []);
 
     const onSubmit = async (data) => {
-        const result = {};
-        const fields = allFields;
+        const result = [];
+        const fields = Object.values(allFields); // получаем ключи объекта в виде массива строк
+
         fields.forEach((field) => {
             if (data[field] !== undefined) {
-                result[field] = data[field];
+                result.push(data[field]); // добавляем значение поля в массив result
             }
         });
 
         try {
-            const csvData = Object.values(result).join(","); // Преобразование данных в формат CSV
-
-            const spreadsheetId = '127Gxe82GUUTUsJ2VQMJPKe1jgr6Qb2JJZNy6p7nq7aE';
-            const sheetname = 'Results';
-            const accessToken = 'YOUR_ACCESS_TOKEN'; // Полученный OAuth 2.0 токен доступа
-
-            const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${sheetname}?valueInputOption=RAW`;
-
-            const response = await fetch(url, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "text/csv",
-                    "Authorization": `Bearer ${accessToken}`,
-                    "Referer": "http://localhost:3000"
-                },
-                body: csvData,
-            });
-
-            if (response.ok) {
-                setIsSend(true);
-                setTimeout(() => {
-                    setIsSend(false);
-                }, 5000);
-                reset();
-            } else {
-                // Обработка ошибки
-            }
-        } catch (error) {
-            // Обработка ошибки
+            await axios.post("http://localhost:4000/proxy", result); // здесь мы передаем массив значений в качестве тела запроса
+            setIsSend(true);
+            setTimeout(() => {
+                setIsSend(false);
+            }, 5000);
+            /*reset();*/
+        }
+        catch (error) {
+            console.error(error);
         }
     };
 
 
-    /*const onSubmit = async (data) => {
-        const result = {};
-        const fields = allFields;
-        fields.forEach((field) => {
-            if (data[field] !== undefined) {
-                result[field] = data[field];
-            }
-        });
-
-        try {
-            const response = await fetch("https://sheets.googleapis.com/v4/spreadsheets/127Gxe82GUUTUsJ2VQMJPKe1jgr6Qb2JJZNy6p7nq7aE/values/%D0%A0%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D1%8B?key=AIzaSyCYVOhUd2S7CN0zKVonNEIzi39DJ9KInyQ", {
-                method: "POST",
-                mode: 'cors',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Origin": "*",
-                },
-                body: JSON.stringify(result),
-            });
-
-            if (response.ok) {
-                setIsSend(true);
-                setTimeout(() => {
-                    setIsSend(false);
-                }, 5000);
-                reset();
-            } else {
-                // Обработка ошибки
-            }
-        } catch (error) {
-            // Обработка ошибки
-        }
-    };*/
 
     return (
         <main>
