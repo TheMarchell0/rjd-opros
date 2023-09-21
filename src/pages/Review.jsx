@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {useForm, FormProvider} from "react-hook-form";
 import axios from 'axios';
 import {questionsList} from "../vendor/questionsList";
-import {allFields} from "../vendor/allFields";
 import css from './review.module.scss';
 import Question from "../components/Question";
 
@@ -14,10 +13,8 @@ function Review() {
 
 
     const onSubmit = async (data) => {
-        console.log(data)
-
         try {
-            await axios.post("http://localhost:4000/proxy", data); // здесь мы передаем объект data в качестве тела запроса
+            await axios.post("http://localhost:4000/proxy", data);
             setIsSend(true);
             setTimeout(() => {
                 setIsSend(false);
