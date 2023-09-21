@@ -14,7 +14,7 @@ function Review() {
 
     const onSubmit = async (data) => {
         try {
-            await axios.post("https://rjd-opros.vercel.app/proxy", data);
+            await axios.post("https://rjd-opros.vercel.app:4000/proxy", data);
             setIsSend(true);
             setTimeout(() => {
                 setIsSend(false);
