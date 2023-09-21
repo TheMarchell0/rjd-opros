@@ -14,7 +14,7 @@ function Review() {
 
     const onSubmit = async (data) => {
         try {
-            await axios.post("/proxy", data);
+            await axios.post("http:localhost:4000/proxy", data);
             setIsSend(true);
             setTimeout(() => {
                 setIsSend(false);
