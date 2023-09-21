@@ -22,7 +22,7 @@ function Review() {
             setTimeout(() => {
                 setIsSend(false);
             }, 5000);
-            /*reset();*/
+            reset();
         }
         catch (error) {
             console.error(error);
