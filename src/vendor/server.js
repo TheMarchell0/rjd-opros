@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbzdDG--DpiMAfL_mrwZoArXQAthbHpDr9vQc2-3wblpMvWI62_6hl1fR31_CWOrcaLuLA/exec';
+const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyfYzPr8FoSmGG5Hx0GepqlJhxqL-INcD6s0Gj-U5-uiT03TGpxxQe57Q5AyvGpAbKVfA/exec';
 
 app.post('/proxy', async (req, res) => {
     try {

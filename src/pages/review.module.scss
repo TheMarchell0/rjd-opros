@@ -2,10 +2,24 @@
   display: flex;
   padding-top: 124px;
   margin-bottom: 101px;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding-top: 55px;
+    margin-bottom: 50px;
+  }
 }
 
 .headImg {
   margin: 6px 60px 0 0;
+
+  @media (max-width: 767px) {
+    margin: 0 0 30px 0;
+    max-width: 300px;
+    width: 100%;
+  }
 }
 
 .headTitle {
@@ -14,6 +28,10 @@
   font-size: 64px;
   font-weight: 700;
   margin-bottom: 37px;
+
+  @media (max-width: 530px) {
+    font-size: 33px;
+  }
 }
 
 .headDescription {
@@ -34,6 +52,11 @@
   background: #F5F5F5;
   padding: 37px 40px 42px;
   margin-bottom: 60px;
+
+  @media (max-width: 530px) {
+    padding: 37px 20px 32px;
+    margin-bottom: 30px;
+  }
 }
 
 .formTitle {
@@ -42,6 +65,11 @@
   font-size: 40px;
   font-weight: 700;
   margin-bottom: 44px;
+
+  @media (max-width: 530px) {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
 }
 
 .formCommentText {
@@ -49,6 +77,10 @@
   font-size: 24px;
   font-weight: 500;
   margin: 14px 0 19px;
+
+  @media (max-width: 530px) {
+    font-size: 16px;
+  }
 }
 
 .list {
@@ -73,12 +105,21 @@
   &:hover {
     opacity: 0.7;
   }
+
+  @media (max-width: 530px) {
+    padding: 20px 42px;
+    font-size: 20px;
+  }
 }
 
 .footerTitle {
   color: #E3051B;
   font-size: 40px;
   margin-bottom: 25px;
+
+  @media (max-width: 530px) {
+    font-size: 25px;
+  }
 }
 
 .successMessage {
@@ -89,6 +130,10 @@
   opacity: 0;
   margin-top: 30px;
   text-align: center;
+
+  @media (max-width: 767px) {
+    font-size: 25px;
+  }
 }
 
 .successMessageVisible {

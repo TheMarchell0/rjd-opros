@@ -14,17 +14,10 @@ function Review() {
 
 
     const onSubmit = async (data) => {
-        const result = [];
-        const fields = Object.values(allFields); // получаем ключи объекта в виде массива строк
-
-        fields.forEach((field) => {
-            if (data[field] !== undefined) {
-                result.push(data[field]); // добавляем значение поля в массив result
-            }
-        });
+        console.log(data)
 
         try {
-            await axios.post("http://localhost:4000/proxy", result); // здесь мы передаем массив значений в качестве тела запроса
+            await axios.post("http://localhost:4000/proxy", data); // здесь мы передаем объект data в качестве тела запроса
             setIsSend(true);
             setTimeout(() => {
                 setIsSend(false);
