@@ -10,22 +10,24 @@ function Review() {
     const formMethods = useForm();
     const {register, handleSubmit, formState: {errors}, reset} = formMethods;
     const [isSend, setIsSend] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
 
     const onSubmit = async (data) => {
+        setIsLoading(true);
         try {
             await axios.post("https://the-marchell0-proxy.vercel.app/proxy", data);
+            setIsLoading(false);
             setIsSend(true);
             setTimeout(() => {
                 setIsSend(false);
             }, 5000);
             reset();
-        }
-        catch (error) {
+        } catch (error) {
+            setIsLoading(false);
             console.error(error);
         }
     };
-
 
 
     return (
@@ -160,9 +162,16 @@ function Review() {
                                    placeholder='Введите текст...'/>
                         </div>
                         <button className={css.button} type="submit">Отправить</button>
-                        <p className={`${css.successMessage} ${isSend && css.successMessageVisible}`}>Спасибо за
-                            пройденный
-                            опрос!</p>
+                        <div className={css.finish}>
+                            <div
+                                className={`${css.loader} ${
+                                    isLoading ? css.loaderVisible : css.loaderHidden
+                                }`}
+                            ></div>
+                            <p className={`${css.successMessage} ${isSend && css.successMessageVisible}`}>Спасибо за
+                                пройденный
+                                опрос!</p>
+                        </div>
                     </form>
                 </FormProvider>
             </div>

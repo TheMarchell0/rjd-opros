@@ -122,15 +122,41 @@
   }
 }
 
+.finish {
+  position: relative;
+  margin-top: 30px;
+}
+
+.loader {
+  width: 100px;
+  height: 100px;
+  border: 6px dashed #E3051B;
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: spin 4s infinite linear;
+  transition: 0.1s linear;
+}
+
+.loaderVisible {
+  opacity: 1;
+}
+
+.loaderHidden {
+  opacity: 0;
+}
+
 .successMessage {
   transition: opacity 0.3s;
   color: green;
   font-size: 40px;
   font-weight: bold;
   opacity: 0;
-  margin-top: 30px;
+  width: 100%;
   text-align: center;
-
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   @media (max-width: 767px) {
     font-size: 25px;
   }
@@ -138,4 +164,13 @@
 
 .successMessageVisible {
   opacity: 1;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
