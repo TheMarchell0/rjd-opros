@@ -19,7 +19,7 @@ function Question({ title, name, error, isSend }) {
     }, [isSend]);
 
     useEffect(() => {
-        if (title.includes("Чтобы вы хотели изменить") || title.includes("Чего вам не хватает")) {
+        if (title.includes("Что бы вы хотели изменить?") || title.includes("Чего вам не хватает?")) {
             setTextTrigger(true);
         }
     }, [title]);
