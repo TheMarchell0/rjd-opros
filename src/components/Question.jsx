@@ -4,6 +4,7 @@ import css from "./question.module.scss";
 
 function Question({ title, name, error, isSend }) {
     const [textTrigger, setTextTrigger] = useState(false);
+    const [isQuestion, setIsQuestion] = useState(true);
     const [selected, setSelected] = useState(null);
     const { register, setValue, watch } = useFormContext();
     const validationErrorRef = useRef();
@@ -21,6 +22,9 @@ function Question({ title, name, error, isSend }) {
     useEffect(() => {
         if (title.includes("Что бы вы хотели изменить?") || title.includes("Чего вам не хватает?")) {
             setTextTrigger(true);
+        }
+        if (!title.includes('?')) {
+            setIsQuestion(false)
         }
     }, [title]);
 
@@ -71,7 +75,7 @@ function Question({ title, name, error, isSend }) {
 
     return (
         <div>
-            <p className={css.title}>{title}</p>
+            <p className={css.title}>{isQuestion ? title : `${title}.`}</p>
             <div className={css.list}>{textTrigger ? textInput : radioInput}</div>
             {!textTrigger && (
                 <p ref={validationErrorRef} className={`${css.validationError} ${error ? css.visible : ""}`}>
